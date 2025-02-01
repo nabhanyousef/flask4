@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Doctor Page</h1>
+        <div class="doctor-container">
+            <!-- Patient Image -->
+            <div class="image-section">
+                <img src="{{ url_for('static', filename='uploads/' + patient.image) }}" alt="Patient Image" width="300">
+            </div>
+
+            <!-- Input Boxes -->
+            <div class="form-section">
+                <form method="POST">
+                    <label for="symptoms">Symptoms:</label>
+                    <textarea id="symptoms" name="symptoms" rows="4" required></textarea>
+
+                    <label for="diagnosis">Diagnosis:</label>
+                    <textarea id="diagnosis" name="diagnosis" rows="4" required></textarea>
+
+                    <label for="review">Review:</label>
+                    <textarea id="review" name="review" rows="4" required></textarea>
+
+                    <button type="submit" class="btn">Save Report</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Download PDF Button -->
+        <a href="{{ url_for('download_pdf', patient_id=patient.patient_id) }}" class="btn">Download PDF</a>
+
+        <!-- Logout Button -->
+        <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

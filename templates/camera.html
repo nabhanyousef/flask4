@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Camera</h1>
+        <div class="camera-container">
+            <video id="video" width="640" height="480" autoplay></video>
+            <canvas id="canvas" width="640" height="480"></canvas>
+        </div>
+        <button id="capture-btn" class="btn">Capture Image</button>
+        <form id="upload-form" method="POST" style="display: none;">
+            <input type="hidden" name="image" id="image-input">
+            <button type="submit" class="btn">Save and Proceed</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const captureBtn = document.getElementById('capture-btn');
+            const imageInput = document.getElementById('image-input');
+            const uploadForm = document.getElementById('upload-form');
+
+            // Access the camera
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(err => {
+                    console.error('Error accessing the camera: ', err);
+                });
+
+            // Capture image
+            captureBtn.addEventListener('click', function () {
+                const context = canvas.getContext('2d');
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert the image to base64
+                const imageData = canvas.toDataURL('image/png');
+                imageInput.value = imageData;
+
+                // Show a success message
+                alert('Image saved successfully!');
+
+                // Submit the form
+                uploadForm.submit();
+            });
+        });
+    </script>
+</body>
+</html>

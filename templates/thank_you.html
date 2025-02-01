@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Thank You!</h1>
+    <p>Thank you for using our application. Your data has been saved successfully.</p>
+    <p>For any inquiries, you can call Dr. Vishal Patel at <strong>+91 9725635555</strong>.</p>
+    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Final Report for {{ patient.patient_name }}</h1>
+        <div class="report-container">
+            <div class="image-section">
+                <img src="{{ url_for('static', filename='uploads/' + patient.image) }}" alt="Patient Image" width="300">
+            </div>
+            <div class="form-section">
+                <form method="POST">
+                    <label for="symptoms">Symptoms:</label>
+                    <textarea id="symptoms" name="symptoms" rows="4" required>{{ patient.symptoms }}</textarea>
+
+                    <label for="diagnosis">Diagnosis:</label>
+                    <textarea id="diagnosis" name="diagnosis" rows="4" required>{{ patient.diagnosis }}</textarea>
+
+                    <label for="review">Review:</label>
+                    <textarea id="review" name="review" rows="4" required>{{ patient.review }}</textarea>
+
+                    <div class="buttons">
+                        <button type="submit" class="btn">Save Report</button>
+                        <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Instructions</h1>
+    <ul>
+        <li>Clean your face.</li>
+        <li>Keep your eyes directly facing the camera.</li>
+        <li>Do not smile.</li>
+        <li>Keep your face inside the ellipse.</li>
+    </ul>
+    <a href="{{ url_for('camera') }}"><button>Next</button></a>
+</body>
+</html>
